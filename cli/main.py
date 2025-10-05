@@ -2,11 +2,13 @@ import sys
 import json
 from cli.metrics.license_metric import LicenseMetric
 from cli.metrics.size_metric import SizeMetric   
+from cli.metrics.rampup_metric import RampUpMetric
+from cli.metrics.bus_factor_metric import BusFactorMetric
 
 
 def process_url(url: str):
     # License and Size metrics 
-    metrics = [LicenseMetric(), SizeMetric()]  
+    metrics = [LicenseMetric(), SizeMetric(), RampUpMetric(), BusFactorMetric()]  
 
     results = {}
     for metric in metrics:
@@ -52,7 +54,7 @@ def main():
 
     for url in urls:
         result = process_url(url)
-        print(json.dumps(result, indent=2))  # for readability
+        print(json.dumps(result, separators=(",", ":")))  # for readability
 
 
 if __name__ == "__main__":
